@@ -24,6 +24,23 @@
                     @include('profile.partials.delete-user-form')
                 </div>
             </div>
+            
+            <body>
+            <h1 class="about_me">edit</h1>
+            <div class="content">
+                <form action="/profile/about_me/{{$user->id}}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class='content__title'>
+                        <h2>About me</h2>
+                        <input type='text' name='about_me' value="{{ $user->about_me }}">
+                    </div>
+                    
+                        <input type="submit" value="Update">
+                    </form>
+                </div>
+            </body>
+            
             <div>
                 @foreach($user->languages as $language) 
                 <form action="{{ route('profile.delete' , ['language_id'=>$language->id, 'user_id'=>Auth::id()]) }}" method="post">  

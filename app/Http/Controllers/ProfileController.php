@@ -47,6 +47,15 @@ class ProfileController extends Controller
     Auth::user()->languages()->attach($input_language);
     return redirect('profile/edit');
     }
+    
+    public function update_about_me(Request $request, User $user)
+    {
+        $user['about_me'] = $request['about_me'];
+        //$input_about_me = $request['user'];
+        $user->save();
+    
+        return redirect('/profile/edit');
+    }
 
 
     /**
