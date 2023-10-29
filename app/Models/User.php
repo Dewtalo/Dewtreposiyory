@@ -19,8 +19,18 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
+        'email', 
         'password',
+        'category',
+        'gneder',
+        'birthdate',
+        'nationality_id',
+        'language_id',
+        'place_id',
+        'about_me'
+        
+        
+        
     ];
 
     /**
@@ -41,4 +51,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    // Categoryに対するリレーション
+
+//「1対多」の関係なので単数系に
+    
+    public function nationality()
+    {
+        return $this->belongsTo(Nationality::class);
+    }
+    
+    public function languages(){
+    //生徒は多数の科目を履修。
+    return $this->belongsToMany(Language::class);
+}
+
+public function places(){
+    //生徒は多数の科目を履修。
+    return $this->belongsToMany(Place::class);
+}
+ 
 }
