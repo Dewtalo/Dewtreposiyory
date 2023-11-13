@@ -27,6 +27,16 @@
             
             <body>
             <h1 class="about_me">edit</h1>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            
             <div class="content">
                 <form action="/profile/about_me/{{$user->id}}" method="POST">
                     @csrf
@@ -41,7 +51,8 @@
                 </div>
             </body>
             
-            <div>
+            <h2>Language</h2>
+            <div id="langDIV">
                 @foreach($user->languages as $language) 
                 <form action="{{ route('profile.delete' , ['language_id'=>$language->id, 'user_id'=>Auth::id()]) }}" method="post">  
                     @csrf
@@ -53,22 +64,40 @@
             <form action="/profile/language" method="POST">
                 @csrf
                     @method('PUT')
-        
-            
-            <div class="language">
-                <h2>Language</h2>
-                <select name="language[]" multiple>
+                    
+            <div class="scrollable-list" id="LangDIV">
                     @foreach($languages as $language)
-                        <option value="{{ $language->id }}">{{ $language->name }}</option>
+                        <label>
+                        <input type="checkbox" name='language[]' class="language_select" value="{{ $language->id }}">
+                        {{ $language->name }}
+                        </label><br>
                     @endforeach
                 </select>
             </div>
+            <button type="submit">update</button>
+            </form>
             
-            <div class="place">
             <h2>Place</h2>
-                <select name="place[]" multiple>
+            <div id="placeDIV">
+                @foreach($user->places as $place) 
+                <form action="{{ route('profile.delete_place' , ['place_id'=>$place->id, 'user_id'=>Auth::id()]) }}" method="post">  
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">{{$place->name}}✕</button> 
+                </form>
+                @endforeach
+            </div>
+            <form action="/profile/place" method="POST">
+                @csrf
+                    @method('PUT')
+                    
+            <h2>Place</h2>
+            <div class="scrollable-list" id="placesDIV">
                     @foreach($places as $place)
-                        <option value="{{ $place->id }}">{{ $place->name }}</option>
+                        <label>
+                        <input type="checkbox" name='place[]' class="place_select" value="{{ $place->id }}">
+                        {{ $place->name }}
+                        </label><br>
                     @endforeach
                 </select>
             </div>
@@ -79,15 +108,51 @@
     </div>
     <script>
     $(function () {
-        $('select').multipleSelect({
-            width: 200,
-            formatSelectAll: function() {
-                return 'すべて';
-            },
-            formatAllSelected: function() {
-                return '全て選択されています';
+        
+    
+    $(".language_select").click(function(){
+            var $count = $(".language_select:checked").length;
+            var $not = $('.language_select').not(':checked')
+            let numLang = $("#langDIV")[0].childElementCount 
+        
+            if($count >= (3-numLang)) {
+                $not.attr("disabled",true);
+            }
+            if($count >= (3-numLang)) {
+                $not.attr("disabled",true);
+            }
+            else{
+                $not.attr("disabled",false);
             }
         });
     });
+    
+  
+ 
+    </script>
+    
+    <script>
+    $(function () {
+        
+    
+    $(".place_select").click(function(){
+            var $count = $(".place_select:checked").length;
+            var $not = $('.place_select').not(':checked')
+            let numplace = $("#placesDIV")[0].childElementCount 
+        
+            if($count >= (3-numplace)) {
+                $not.attr("disabled",true);
+            }
+            if($count >= (3-numplace)) {
+                $not.attr("disabled",true);
+            }
+            else{
+                $not.attr("disabled",false);
+            }
+        });
+    });
+    
+  
+ 
     </script>
 </x-app-layout>

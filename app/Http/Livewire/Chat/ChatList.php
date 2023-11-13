@@ -70,7 +70,7 @@ class ChatList extends Component
 
     public function render()
     {
-
+        
         $user= auth()->user();
                 return view('livewire.chat.chat-list',[
             'conversations'=>$user->conversations()->latest('updated_at')->get()

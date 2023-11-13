@@ -24,6 +24,14 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
+     
+    public function show2($user_id)
+    {
+    // ユーザー情報を取得し、プロファイルを表示するビューに渡す
+        $user = User::find($user_id);
+        return view('profile.show2', ['user' => $user]);
+    }
+
     public function edit(Request $request, Language $language, Place $place): View
     {
         return view('profile.edit', [
@@ -39,6 +47,14 @@ class ProfileController extends Controller
         return redirect('profile/edit'); 
     }
     
+    public function delete_place($place_id, $user_id)
+    {
+        $user = User::find($user_id);
+        $user->places()->detach($place_id);
+        return redirect('profile/edit'); 
+    }
+    
+    
     public function update_language(Request $request)
     {
         //dd($request->all());
@@ -48,8 +64,20 @@ class ProfileController extends Controller
     return redirect('profile/edit');
     }
     
-    public function update_about_me(Request $request, User $user)
+    public function update_place(Request $request)
     {
+        //dd($request->all());
+        $input_place = $request['place'];
+        //dd($input_language);
+    Auth::user()->places()->attach($input_place);
+    return redirect('profile/edit');
+    }
+    
+    public function update_about_me(Request $request, User $user)
+    {   
+        $request->validate([
+            'about_me' => ['required', 'string', 'max:150'],
+        ]);
         $user['about_me'] = $request['about_me'];
         //$input_about_me = $request['user'];
         $user->save();

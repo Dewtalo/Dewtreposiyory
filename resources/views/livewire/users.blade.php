@@ -48,24 +48,7 @@
     </div>
     {{-- 検索機能ここまで --}}
 
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Place</th>
-            <th>About Me</th>
-        </tr>
-
-        @foreach ($items as $user)
-        <tr>
-            <td>{{ $user->name }}</td>
-            <td>{{ $user->category }}</td>
-            <td>{{ $user->place }}</td>
-            <td>{{ $user->about_me }}</td>
-            {{--mediaテーブルとcategoriesテーブルを結合しているので、この記述でアクセスできる--}}
-        </tr>
-        @endforeach
-    </table>
+    
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 p-2 ">
 
@@ -84,6 +67,28 @@
                     {{$user->name}}
                 </h5>
                 <span class="text-sm text-gray-500">{{$user->email}} </span>
+                <span class="text-sm text-gray-500">{{$user->category}} </span>
+                <span class="text-sm text-gray-500">{{$user->gneder}} </span>
+                <span class="text-sm text-gray-500">{{$user->birthdate}} </span>
+                Nationality
+                <span class="text-sm text-gray-500">{{ $user->nationality->name }}</span>
+                <div class="flex items-center">
+                     Language
+                    <div class="flex ml-2">
+                        @foreach($user->languages as $language)
+                        <span class="text-sm text-gray-500 ml-1">{{$language->name}}</span>
+                        @endforeach
+                    </div>
+                    
+                </div>
+               
+                Place
+                    @foreach($user->places as $place)
+                    <span class="text-sm text-gray-500">{{$place->name}}</span>
+                    @endforeach
+                <span class="text-sm text-gray-500">{{$user->about_me}} </span>
+                
+                
 
                 <div class="flex mt-4 space-x-3 md:mt-6">
 
