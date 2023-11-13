@@ -29,14 +29,18 @@ Route::get('/home', function () {
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class ,'show']);
+    Route::get('/profile', [ProfileController::class ,'show'])->name('profile.show');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::delete('/profile/edit/place/{place_id}/{user_id}', [ProfileController::class, 'delete_place'])->name('profile.delete_place');
     Route::delete('/profile/edit/{language_id}/{user_id}', [ProfileController::class, 'delete'])->name('profile.delete');
     Route::put('/profile/language', [ProfileController::class, 'update_language']);
+    Route::put('/profile/place', [ProfileController::class, 'update_place']);
     Route::put('/profile/about_me/{user}', [ProfileController::class, 'update_about_me']);
     Route::get('/home', [SearchController::class, 'index'])->name('dashboard');
+    Route::get('/profile/{user_id}', [ProfileController::class, 'show2'])->name('profile');
+
 });
 
 require __DIR__.'/auth.php';

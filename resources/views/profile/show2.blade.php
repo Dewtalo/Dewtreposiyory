@@ -29,8 +29,7 @@
         <p>{{$language->name}}</p>
         @endforeach
         
-        
-        @foreach($user->places as $place)
+        <h1 class='places'>@foreach($user->places as $place)
         <p>{{$place->name}}</p>
         @endforeach
         
@@ -41,8 +40,8 @@
                 <p>{{ $user->about_me }}</p>    
             </div>
         </div>
-        <div class="edit"><a href="/profile/edit">edit</a></div>     
-        <a href="/home">back</a>
+           
+        <a href="/">back</a>
         </div>
         
     </body>

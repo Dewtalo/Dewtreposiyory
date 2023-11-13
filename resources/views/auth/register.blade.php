@@ -18,7 +18,7 @@
         
         <div class="mt-4">
             <x-input-label for="birthdate" :value="__('birthdate')" />
-            <x-text-input id="birthdate" class="block mt-1 w-full" type="birthdate" name="birthdate" :value="old('birthdate')" required autocomplete="username" />
+            <x-text-input id="birthdate" class="block mt-1 w-full" type="text" name="birthdate" :value="old('birthdate')" required autocomplete="username" placeholder="2000.01.01" />
             <x-input-error :messages="$errors->get('birthdate')" class="mt-2" />
         </div>
 
@@ -49,9 +49,9 @@
             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
                 {{ __('Already registered?') }}
             </a>
-            
+        </div>          
         <div class="mt-4">
-            <x-input-label for="select_your_category" :value="__('Select Gender')"/>
+            <x-input-label for="select_your_category" :value="__('Select Category')"/>
             <select class="block mt-1 w-20" name="category">
                 <option value="guide">Guide</option>
                 <option value="tourist">Tourist</option>
@@ -80,23 +80,36 @@
             </select>
         </div>
         
-        <div class="language">
-            <h2>Language</h2>
-            <select name="language[]" multiple>
-                @foreach($languages as $language)
-                    <option value="{{ $language->id }}">{{ $language->name }}</option>
-                @endforeach
-            </select>
+        
+        
+          
+        
+        <h2>Language</h2>
+        <h3>Select languages you speak up to 3</h3>
+        <div class="scrollable-list">
+            @foreach ($languages as $language)
+                <label>
+                    <input type="checkbox" name='language[]' class="language_select" value="{{ $language->id }}">
+                    {{ $language->name }}
+                </label><br>
+            @endforeach
         </div>
         
-        <div class="place">
-            <h2>Place</h2>
-            <select name="place[]" multiple>
-                @foreach($places as $place)
-                    <option value="{{ $place->id }}">{{ $place->name }}</option>
-                @endforeach
-            </select>
+        
+        <h2>Place</h2>
+        <div class="scrollable-list">
+            @foreach ($places as $place)
+                <label>
+                    <input type="checkbox" class="place_select" name='place[]' value="{{ $place->id }}">
+                    {{ $place->name }}
+                </label><br>
+            @endforeach
         </div>
+        
+        
+        
+        
+        
         
         <div class="mt-4">
             <x-input-label for="about_me" :value="__('about_me')" />
@@ -109,8 +122,8 @@
     
  
 
-    <x-input-error :messages="$errors->get('nationality')" class="mt-2" />
-</div>
+    
+
 
 
             <x-primary-button class="ml-4">
@@ -121,15 +134,48 @@
     
     <script>
     $(function () {
-        $('select').multipleSelect({
-            width: 200,
-            formatSelectAll: function() {
-                return 'すべて';
-            },
-            formatAllSelected: function() {
-                return '全て選択されています';
+    $(".language_select").click(function(){
+            var $count = $(".language_select:checked").length;
+            var $not = $('.language_select').not(':checked')
+            
+            if($count >= (3)) {
+                $not.attr("disabled",true);
+            }
+            if($count >= (3)) {
+                $not.attr("disabled",true);
+            }
+            else{
+                $not.attr("disabled",false);
             }
         });
     });
+    
+    
+    
+     
+      // チェックボックスをチェックしたら発動
+      
+        
+    </script>
+    <script>
+    $(function () {
+    $(".place_select").click(function(){
+            var $count = $(".place_select:checked").length;
+            var $not = $('.place_select').not(':checked')
+        
+            if($count >= (3)) {
+                $not.attr("disabled",true);
+            }
+            if($count >= (3)) {
+                $not.attr("disabled",true);
+            }
+            else{
+                $not.attr("disabled",false);
+            }
+        });
+    });
+    
+  
+ 
     </script>
 </x-guest-layout>
