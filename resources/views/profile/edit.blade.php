@@ -131,8 +131,8 @@
         
     
     $(".language_select").click(function(){
-            var $count = $(".language_select:checked").length;
-            var $not = $('.language_select').not(':checked')
+            let $count = $(".language_select:checked").length;
+            let $not = $('.language_select').not(':checked')
             let numLang = $("#langDIV")[0].childElementCount 
         
             if($count >= (3-numLang)) {
@@ -156,8 +156,8 @@
         
     
     $(".place_select").click(function(){
-            var $count = $(".place_select:checked").length;
-            var $not = $('.place_select').not(':checked')
+            let $count = $(".place_select:checked").length;
+            let $not = $('.place_select').not(':checked')
             let numplace = $("#placesDIV")[0].childElementCount 
         
             if($count >= (3-numplace)) {
