@@ -167,7 +167,6 @@
                             </x-slot>
         
                             <x-slot name="content">
-
                                 <div class="w-full p-1">
                                     <button class="items-center gap-3 flex w-full px-4 py-2 text-left text-sm leading-5 text-gray-500 hover:bg-gray-100 transition-all duration-150 ease-in-out focus:outline-none focus:bg-gray-100">
                                         @if (Auth::id()===$conversation->messages?->last()?->sender_id)

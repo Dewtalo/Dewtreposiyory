@@ -19,14 +19,13 @@
                 </div>
             </div>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
-                </div>
-            </div>
             
+     
+            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">       
             <body>
-            <h1 class="about_me">edit</h1>
+            <h2 class="text-lg font-medium text-gray-900">
+            {{ __('About Me') }}
+            </h2>
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -42,16 +41,22 @@
                     @csrf
                     @method('PUT')
                     <div class='content__title'>
-                        <h2>About me</h2>
                         <input type='text' name='about_me' value="{{ $user->about_me }}">
                     </div>
-                    
-                        <input type="submit" value="Update">
+                        <x-primary-button>{{ __('Save') }}</x-primary-button>
+                        
                     </form>
                 </div>
             </body>
+            </div>
             
-            <h2>Language</h2>
+            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg"> 
+            <body>
+            <h2 class="text-lg font-medium text-gray-900">
+            {{ __('Language') }}
+            </h2>
+            
+            <p class="mt-1 text-sm text-gray-600">{{ __('Ensure your account is using a long, random password to stay secure.') }}</p>
             <div id="langDIV">
                 @foreach($user->languages as $language) 
                 <form action="{{ route('profile.delete' , ['language_id'=>$language->id, 'user_id'=>Auth::id()]) }}" method="post">  
@@ -64,7 +69,8 @@
             <form action="/profile/language" method="POST">
                 @csrf
                     @method('PUT')
-                    
+                    <p class="mt-1 text-sm text-gray-600">{{ __('Ensure your account is using a long, random password to stay secure.') }}</p>
+            <div id="langDIV">
             <div class="scrollable-list" id="LangDIV">
                     @foreach($languages as $language)
                         <label>
@@ -74,10 +80,16 @@
                     @endforeach
                 </select>
             </div>
-            <button type="submit">update</button>
+            <x-primary-button>{{ __('Update') }}</x-primary-button>
             </form>
+            </body>
+            </div>
             
-            <h2>Place</h2>
+            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">   
+            <body>
+            <h2 class="text-lg font-medium text-gray-900">
+            {{ __('Place') }}
+            </h2>
             <div id="placeDIV">
                 @foreach($user->places as $place) 
                 <form action="{{ route('profile.delete_place' , ['place_id'=>$place->id, 'user_id'=>Auth::id()]) }}" method="post">  
@@ -91,7 +103,7 @@
                 @csrf
                     @method('PUT')
                     
-            <h2>Place</h2>
+        
             <div class="scrollable-list" id="placesDIV">
                     @foreach($places as $place)
                         <label>
@@ -101,9 +113,17 @@
                     @endforeach
                 </select>
             </div>
-            <button type="submit">update</button>
+            <x-primary-button>{{ __('Update') }}</x-primary-button>
             </form>
+            </body>
+            </div>
         
+        <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                <div class="max-w-xl">
+                    @include('profile.partials.delete-user-form')
+                </div>
+            </div>
+            
         </div>
     </div>
     <script>

@@ -82,7 +82,7 @@
                     
                 </div>
                
-                Place
+                    Place
                     @foreach($user->places as $place)
                     <span class="text-sm text-gray-500">{{$place->name}}</span>
                     @endforeach
