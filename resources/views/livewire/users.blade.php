@@ -1,7 +1,7 @@
 <div class="max-w-6xl mx-auto my-16">
 
-    <h5 class="text-center text-5xl font-bold py-3">Users</h5>
-
+    <h5 class="text-center text-5xl font-bold py-3">Find people you want to travel with!</h5>
+   
     <div class="search">
         <form action="{{ route('users') }}" method="GET">
             @csrf
@@ -16,7 +16,7 @@
                 </div>
 
                 <div>
-                    <label for="">Category
+                    <label for="">You are looking for...
                     <div>
                         <select name="category" data-toggle="select">
                             <option value="guide" @if($search_category == "guide") selected @endif>Guide</option>
@@ -27,7 +27,7 @@
                 </div>
 
                 <div>
-                    <label for="">
+                    <label for="">Select a place you wanna go or show around!
                     <div>
                         <select name="place" data-toggle="select">
             
@@ -53,9 +53,9 @@
     <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 p-2 ">
 
         @foreach ($items as $key=> $user)
-            
+           
 
-
+        @if ($user->id !== Auth::user()->id)
         {{-- child --}}
         <div class="w-full bg-white border border-gray-200 rounded-lg p-5 shadow">
 
@@ -81,20 +81,21 @@
                     </div>
                     
                 </div>
-               
+                    <div class="flex items-center">
                     Place
-                    @foreach($user->places as $place)
-                    <span class="text-sm text-gray-500">{{$place->name}}</span>
-                    @endforeach
+                    <div class="flex ml-2">
+                        @foreach($user->places as $place)
+                        <span class="text-sm text-gray-500 ml-1">{{$place->name}}</span>
+                        @endforeach
+                    </div>
+                    </div>
                 <span class="text-sm text-gray-500">{{$user->about_me}} </span>
                 
                 
 
                 <div class="flex mt-4 space-x-3 md:mt-6">
 
-                    <x-secondary-button>
-                        Add Friend
-                    </x-secondary-button>
+                    
 
                     <x-primary-button wire:click="message({{$user->id}})" >
                         Message
@@ -106,7 +107,7 @@
 
 
         </div>
-
+        @endif
         @endforeach
     </div>
 
