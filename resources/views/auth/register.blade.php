@@ -18,7 +18,7 @@
         
         <div class="mt-4">
             <x-input-label for="birthdate" :value="__('birthdate')" />
-            <x-text-input id="birthdate" class="block mt-1 w-full" type="text" name="birthdate" :value="old('birthdate')" required autocomplete="username" placeholder="2000.01.01" />
+            <x-text-input id="birthdate" class="block mt-1 w-full" type="text" name="birthdate" :value="old('birthdate')" required autocomplete="username" placeholder="2000-01-01" />
             <x-input-error :messages="$errors->get('birthdate')" class="mt-2" />
         </div>
 
@@ -85,7 +85,7 @@
           
         
         <h2>Language</h2>
-        <h3>Select languages you speak up to 3</h3>
+        <p class="mt-1 text-sm text-gray-600">{{ __('Select up to 3 languages you speak') }}</p>
         <div class="scrollable-list">
             @foreach ($languages as $language)
                 <label>
@@ -97,6 +97,7 @@
         
         
         <h2>Place</h2>
+        <p class="mt-1 text-sm text-gray-600">{{ __('Select up to 3 places you want to go or show around') }}</p>
         <div class="scrollable-list">
             @foreach ($places as $place)
                 <label>
@@ -112,8 +113,10 @@
         
         
         <div class="mt-4">
-            <x-input-label for="about_me" :value="__('about_me')" />
-            <x-text-input id="about_me" class="block mt-1 w-full" type="about_me" name="about_me" :value="old('about_me')" required autocomplete="username" />
+            <h2>About me</h2>
+            
+            <p class="mt-1 text-sm text-gray-600">{{ __('Say few words about yourself, where you want to go as a tourist or show arond as a guide so other users can find and talk to you more easily!　*up to 150 letters including spaces') }}</p>
+            <x-text-input id="about_me" class="block mt-1 w-full" type="about_me" name="about_me" :value="old('about_me')" required autocomplete="username" placeholder="I wanna go see Tokyotower!" />
             <x-input-error :messages="$errors->get('about_me')" class="mt-2" />
         </div>
         

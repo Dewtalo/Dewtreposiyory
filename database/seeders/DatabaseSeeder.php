@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
        
        
         $this->call(NationalitySeeder::class);
-        \App\Models\User::factory(10)->create();
+        //\App\Models\User::factory(10)->create();
         $this->call(LanguageSeeder::class);
         $this->call(PlaceSeeder::class);
         //profile作るときはthis->call(UserSeeder::class);をここに書く
