@@ -12,6 +12,7 @@ use App\Models\Language;
 use App\Models\Place;
 use App\Models\User;
 
+
 class ProfileController extends Controller
 {
     
@@ -30,7 +31,7 @@ class ProfileController extends Controller
     // ユーザー情報を取得し、プロファイルを表示するビューに渡す
         $user = User::find($user_id);
         return view('profile.show2', ['user' => $user]);
-    }
+    }//
 
     public function edit(Request $request, Language $language, Place $place): View
     {
